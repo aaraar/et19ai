@@ -13,7 +13,7 @@ require("dotenv").config();
 
 var client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 var client_secret = process.env.SPOTIFT_CLIENT_SECRET; // Your secret
-var redirect_uri = "http://localhost:3000/test"; // Your redirect uri
+var redirect_uri = "https://localhost:8443/test"; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters

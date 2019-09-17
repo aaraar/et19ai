@@ -1,22 +1,28 @@
 const DeepAffects = require("deep-affects");
 const defaultClient = DeepAffects.ApiClient.instance;
 const express = require("express");
-var cors = require("cors");
-var cookieParser = require("cookie-parser");
-
-var request = require("request");
-require("dotenv").config();
+const https = require("https");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const spotifyAuth = require("./spotifyAuthorization/userAuthorization");
+const fs = require("fs");
+const ejs = require("ejs");
+require("dotenv").config();
 
-const port = 3000;
+const port = 8443;
 const app = express();
 let emoData;
+var credentials = {
+	key: fs.readFileSync(__dirname + "/sslcerts/node-selfsigned.key", "utf8"),
+	cert: fs.readFileSync(__dirname + "/sslcerts/node-selfsigned.crt", "utf8")
+};
+var httpsServer = https.createServer(credentials, app);
 
-app.listen(port, () => console.log(`App listening on port ${port}!`));
 app
 	.use(express.static(__dirname + "/public"))
 	.use(cors())
 	.use(cookieParser());
+app.set("view engine", "ejs");
 
 const UserSecurity = defaultClient.authentications["UserSecurity"];
 UserSecurity.apiKey = process.env.DEEP_AFFECTS_API_KEY;
@@ -41,3 +47,5 @@ app
 	.get("/login", spotifyAuth.onLogin)
 	.get("/callback", spotifyAuth.onCallback)
 	.get("/refresh_token", spotifyAuth.onRefreshToken);
+
+httpsServer.listen(port, () => console.log(`App listening on port ${port}!`));
