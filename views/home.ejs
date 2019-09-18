@@ -5,5 +5,10 @@
 
 <button id="stop">Stop</button>
 <div class="player-container"></div>
+<form action="/analyzeAudio" method="POST">
+	<input type="hidden" id="audioFile" name="audioFile" />
+	<button type="submit">Analyze Audio</button>
+</form>
+
 <script src="/static/script.js"></script>
 <%- include('partials/footer'); %>
