@@ -17,11 +17,11 @@ require("dotenv").config();
 const port = 3000;
 const app = express();
 let emoData;
-const credentials = {
-	key: fs.readFileSync("./sslcerts/localhost.key", "utf8"),
-	cert: fs.readFileSync("./sslcerts/localhost.crt", "utf8")
-};
-const httpsServer = https.createServer(credentials, app);
+//const credentials = {
+//	key: fs.readFileSync("./sslcerts/localhost.key", "utf8"),
+//	cert: fs.readFileSync("./sslcerts/localhost.crt", "utf8")
+//};
+//const httpsServer = https.createServer(credentials, app);
 
 app
 	.use("/static", express.static(__dirname + "/public"))
