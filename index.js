@@ -14,7 +14,7 @@ const slug = require("slug");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-const port = 3000;
+const port = process.env.PORT;
 const app = express();
 let emoData;
 //const credentials = {
@@ -25,7 +25,8 @@ let emoData;
 
 app
 	.use("/static", express.static(__dirname + "/public"))
-	.use(bodyParser.urlencoded({ extended: true }))
+	.use(bodyParser.json({ limit: "50mb", extended: true }))
+	.use(bodyParser.urlencoded({ limit: "50mb", extended: true }))
 	.use(cors())
 	.use(cookieParser());
 app.set("views", __dirname + "/views");
