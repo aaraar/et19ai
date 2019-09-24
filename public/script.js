@@ -55,6 +55,17 @@ const handleSuccess = function(stream) {
 
 	mediaRecorder.start();
 };
+window.onkeydown = function(e) { 
+	return !(e.keyCode == 32);  // prevent pagescroll on space bar
+  };
+addEventListener("keydown", function(event) {
+    if (event.keyCode == 32)
+	  document.body.classList.add("recording");  // changes background when pressing spacebar
+  });
+addEventListener("keyup", function(event) {
+    if (event.keyCode == 32)
+      document.body.classList.remove("recording"); // removes recording when space is released
+});
 
 document.querySelector("#start").addEventListener("click", () => {
 	navigator.mediaDevices
