@@ -4,13 +4,16 @@ body {
     background-size: cover;
     height: 100vh;
 }
-.recording {
-    background: linear-gradient(270deg, #7aedcf, #17ff59, #0d802e);
-background-size: 600% 600%;
 
--webkit-animation: AnimationName 9s ease infinite;
--moz-animation: AnimationName 9s ease infinite;
-animation: AnimationName 9s ease infinite;
+.recording {
+    background-image: linear-gradient(270deg, #7aedcf, #17ff59, #0d802e);
+background-size: 600% 600%;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+-webkit-background-clip: text;
+-webkit-animation: AnimationName 4s ease infinite;
+-moz-animation: AnimationName 4s ease infinite;
+animation: AnimationName 4s ease infinite;
 }
 @-webkit-keyframes AnimationName {
     0%{background-position:0% 50%}

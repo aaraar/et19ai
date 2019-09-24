@@ -6,16 +6,17 @@ UserSecurity.apiKey = process.env.DEEP_AFFECTS_API_KEY;
 //UserSecurity.apiKeyPrefix = 'Token';
 
 const apiInstance = new DeepAffects.EmotionApi();
-const body = DeepAffects.Audio.fromFile("./audio.wav"); // {Audio} Audio object
+const body = DeepAffects.Audio.fromFile("./boos.wav"); // {Audio} Audio object
 const fs = require("fs");
 
 function onAnalyzeAudioPost(req, res) {
 	let audioFile = req.body.audioFile;
 	let base64Audio = audioFile.split(";base64,").pop();
 
-	fs.writeFile("audio.wav", base64Audio, { encoding: "base64" }, function(err) {
-		console.log("File created");
-	});
+	// fs.writeFile("audio.wav", base64Audio, { encoding: "base64" }, function(err) {
+	// 	console.log("File created");
+	// });
+	console.log('analyzing file now...');
 	res.redirect("/analyzedAudio");
 }
 

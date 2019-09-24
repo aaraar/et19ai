@@ -38,7 +38,7 @@ app
 	.get("/login", spotifyAuth.onLogin)
 	.get("/callback", spotifyAuth.onCallback)
 	.get("/refresh_token", spotifyAuth.onRefreshToken);
-console.log(`${onAnalyzeAudioPost}`);
+
 app.post("/analyzeAudio", onAnalyzeAudioPost);
 app.get("/analyzedAudio", onAnalyzedAudio);
 

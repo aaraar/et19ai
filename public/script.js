@@ -1,6 +1,7 @@
 console.log("connected");
 let shouldStop = false;
 let stopped = false;
+const recording = document.getElementById("recording");
 const downloadLink = document.getElementById("download");
 const stopButton = document.getElementById("stop");
 const playerContainer = document.querySelector(".player-container");
@@ -55,16 +56,21 @@ const handleSuccess = function(stream) {
 
 	mediaRecorder.start();
 };
+//============== SPACEBAR RECORD =================
 window.onkeydown = function(e) { 
 	return !(e.keyCode == 32);  // prevent pagescroll on space bar
   };
 addEventListener("keydown", function(event) {
-    if (event.keyCode == 32)
-	  document.body.classList.add("recording");  // changes background when pressing spacebar
-  });
+    if (event.keyCode == 32){
+	  recording.classList.add("recording");  // changes background when pressing spacebar
+	  
+	}
+});
 addEventListener("keyup", function(event) {
-    if (event.keyCode == 32)
-      document.body.classList.remove("recording"); // removes recording when space is released
+    if (event.keyCode == 32){
+      recording.classList.remove("recording"); // removes recording when space is released
+	
+	}
 });
 
 document.querySelector("#start").addEventListener("click", () => {
