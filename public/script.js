@@ -14,6 +14,14 @@ const handleSuccess = function(stream) {
 	stopButton.addEventListener("click", function() {
 		mediaRecorder.stop();
 	});
+	addEventListener("keyup", function(event) {
+		if (event.keyCode == 32){
+		  recording.classList.remove("recording"); // removes recording when space is released
+			fired = false;
+			mediaRecorder.stop();
+		}
+		
+	});
 	const options = { mimeType: "audio/webm" };
 	const recordedChunks = [];
 	const mediaRecorder = new MediaRecorder(stream, options);
@@ -60,18 +68,32 @@ const handleSuccess = function(stream) {
 window.onkeydown = function(e) { 
 	return !(e.keyCode == 32);  // prevent pagescroll on space bar
   };
+let fired = false;
 addEventListener("keydown", function(event) {
+	if (event.repeat) {return}
     if (event.keyCode == 32){
+		fired = true;
+	record();	
 	  recording.classList.add("recording");  // changes background when pressing spacebar
-	  
 	}
+	console.log(fired);
+
+	addEventListener("keyup", function(event) {
+		if (event.keyCode == 32){
+		  recording.classList.remove("recording"); // removes recording when space is released
+			fired = false;
+			
+		}
+		
+	});
 });
-addEventListener("keyup", function(event) {
-    if (event.keyCode == 32){
-      recording.classList.remove("recording"); // removes recording when space is released
-	
-	}
-});
+
+function record(){
+		navigator.mediaDevices
+		.getUserMedia({ audio: true, video: false })
+		.then(handleSuccess);	
+}
+
 
 document.querySelector("#start").addEventListener("click", () => {
 	navigator.mediaDevices

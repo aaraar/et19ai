@@ -33,7 +33,7 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
 app
-	.get("/", (req, res) => res.render("home", { title: "home" }))
+	.get("/", (req, res) => res.render("home", { title: "home", data: emoData }))
 	.get("/test", (req, res) => res.send(body))
 	.get("/boos", (req, res) => res.send(emoData))
 	.get("/login", spotifyAuth.onLogin)
