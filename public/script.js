@@ -5,6 +5,8 @@ const recording = document.getElementById("recording");
 const downloadLink = document.getElementById("download");
 const stopButton = document.getElementById("stop");
 const playerContainer = document.querySelector(".player-container");
+const analyzeButton = document.querySelector(".formAjaxButton");
+const dataContainer = document.querySelector(".emotionData");
 
 stopButton.addEventListener("click", function() {
 	shouldStop = true;
@@ -15,12 +17,11 @@ const handleSuccess = function(stream) {
 		mediaRecorder.stop();
 	});
 	addEventListener("keyup", function(event) {
-		if (event.keyCode == 32){
-		  recording.classList.remove("recording"); // removes recording when space is released
+		if (event.keyCode == 32) {
+			recording.classList.remove("recording"); // removes recording when space is released
 			fired = false;
 			mediaRecorder.stop();
 		}
-		
 	});
 	const options = { mimeType: "audio/webm" };
 	const recordedChunks = [];
@@ -65,38 +66,65 @@ const handleSuccess = function(stream) {
 	mediaRecorder.start();
 };
 //============== SPACEBAR RECORD =================
-window.onkeydown = function(e) { 
-	return !(e.keyCode == 32);  // prevent pagescroll on space bar
-  };
+window.onkeydown = function(e) {
+	return !(e.keyCode == 32); // prevent pagescroll on space bar
+};
 let fired = false;
 addEventListener("keydown", function(event) {
-	if (event.repeat) {return}
-    if (event.keyCode == 32){
+	if (event.repeat) {
+		return;
+	}
+	if (event.keyCode == 32) {
 		fired = true;
-	record();	
-	  recording.classList.add("recording");  // changes background when pressing spacebar
+		record();
+		recording.classList.add("recording"); // changes background when pressing spacebar
 	}
 	console.log(fired);
 
 	addEventListener("keyup", function(event) {
-		if (event.keyCode == 32){
-		  recording.classList.remove("recording"); // removes recording when space is released
+		if (event.keyCode == 32) {
+			recording.classList.remove("recording"); // removes recording when space is released
 			fired = false;
-			
 		}
-		
 	});
 });
 
-function record(){
-		navigator.mediaDevices
+function record() {
+	navigator.mediaDevices
 		.getUserMedia({ audio: true, video: false })
-		.then(handleSuccess);	
+		.then(handleSuccess);
 }
-
 
 document.querySelector("#start").addEventListener("click", () => {
 	navigator.mediaDevices
 		.getUserMedia({ audio: true, video: false })
 		.then(handleSuccess);
+});
+
+analyzeButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	const audioBlob = document.getElementById("audioFile");
+	async function getEmotionData() {
+		let emotionCall = await fetch("/analyzeAudio", {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ audioFile: audioBlob.value })
+		});
+		let emotion = await emotionCall;
+		console.log(emotion);
+	}
+	async function getAnalyzedData() {
+		let analyzedDataCall = await fetch("/analyzedAudio");
+		let analyzedData = await analyzedDataCall.json();
+		return analyzedData;
+	}
+	getEmotionData().then(() => {
+		console.log("file created on server");
+		getAnalyzedData().then((data) => {
+			console.log(data);
+		});
+	});
 });
