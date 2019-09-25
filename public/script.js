@@ -10,6 +10,7 @@ const dataContainer = document.querySelector(".emotionData");
 
 stopButton.addEventListener("click", function() {
 	shouldStop = true;
+	analyzeButton.classList.add("active");
 });
 
 const handleSuccess = function(stream) {
@@ -18,6 +19,7 @@ const handleSuccess = function(stream) {
 	});
 	addEventListener("keyup", function(event) {
 		if (event.keyCode == 32) {
+			analyzeButton.classList.add("active");
 			recording.classList.remove("recording"); // removes recording when space is released
 			fired = false;
 			mediaRecorder.stop();
@@ -96,6 +98,7 @@ function record() {
 }
 
 document.querySelector("#start").addEventListener("click", () => {
+	stopButton.classList.add("active");
 	navigator.mediaDevices
 		.getUserMedia({ audio: true, video: false })
 		.then(handleSuccess);
