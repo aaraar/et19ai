@@ -28,7 +28,7 @@ function onAnalyzedAudio(req, res) {
 		} else {
 			console.log("API called successfully. Returned data: " + response);
 			emoData = JSON.parse(response.text);
-			res.send(emoData);
+			return emoData;
 		}
 	});
 }
