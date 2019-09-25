@@ -1,6 +1,7 @@
 console.log("connected");
 let shouldStop = false;
 let stopped = false;
+const recording = document.getElementById("recording");
 const downloadLink = document.getElementById("download");
 const stopButton = document.getElementById("stop");
 const playerContainer = document.querySelector(".player-container");
@@ -12,6 +13,14 @@ stopButton.addEventListener("click", function() {
 const handleSuccess = function(stream) {
 	stopButton.addEventListener("click", function() {
 		mediaRecorder.stop();
+	});
+	addEventListener("keyup", function(event) {
+		if (event.keyCode == 32){
+		  recording.classList.remove("recording"); // removes recording when space is released
+			fired = false;
+			mediaRecorder.stop();
+		}
+		
 	});
 	const options = { mimeType: "audio/webm" };
 	const recordedChunks = [];
@@ -55,6 +64,36 @@ const handleSuccess = function(stream) {
 
 	mediaRecorder.start();
 };
+//============== SPACEBAR RECORD =================
+window.onkeydown = function(e) { 
+	return !(e.keyCode == 32);  // prevent pagescroll on space bar
+  };
+let fired = false;
+addEventListener("keydown", function(event) {
+	if (event.repeat) {return}
+    if (event.keyCode == 32){
+		fired = true;
+	record();	
+	  recording.classList.add("recording");  // changes background when pressing spacebar
+	}
+	console.log(fired);
+
+	addEventListener("keyup", function(event) {
+		if (event.keyCode == 32){
+		  recording.classList.remove("recording"); // removes recording when space is released
+			fired = false;
+			
+		}
+		
+	});
+});
+
+function record(){
+		navigator.mediaDevices
+		.getUserMedia({ audio: true, video: false })
+		.then(handleSuccess);	
+}
+
 
 document.querySelector("#start").addEventListener("click", () => {
 	navigator.mediaDevices
