@@ -51,6 +51,7 @@ const handleSuccess = function(stream) {
             `;
 		downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
 		downloadLink.download = "acetest.wav";
+		downloadLink.classList.add("active");
 
 		playerEl.classList.add("audio-player");
 		playerEl.innerHTML = playerMarkup;

@@ -58,6 +58,12 @@ h1 {
 #stop {
 	display: none;
 }
+#download {
+	display: none;
+}
+#download.active {
+	display: block;
+}
 #stop.active {
 	display: block;
 }
