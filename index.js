@@ -1,13 +1,11 @@
-const DeepAffects = require("deep-affects");
 const express = require("express");
-const https = require("https");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const spotifyAuth = require("./spotifyAuthorization/userAuthorization");
-// const {
-// 	onAnalyzedAudio,
-// 	onAnalyzeAudioPost
-// } = require("./controllers/analyzeAudio");
+const {
+	  onAnalyzedAudio,
+ 	  onAnalyzeAudioPost
+} = require("./controllers/analyzeAudio");
 const fs = require("fs");
 const ejs = require("ejs");
 const slug = require("slug");
@@ -28,7 +26,7 @@ let emoData;
 app
 	.use("/static", express.static(__dirname + "/public"))
 	.use(bodyParser.json({ limit: "50mb", extended: true }))
-	.use(bodyParser.urlencoded({ limit: "50mb", extended: true }))
+	.use(bodyParser.urlencoded({ limit: "50mb", extended: true })) //Hoog limiet op bodyparser voor audio files en JSON response
 	.use(cors())
 	.use(cookieParser())
 	.use("/", routes)
@@ -43,7 +41,7 @@ app
 	.get("/callback", spotifyAuth.onCallback)
 	.get("/refresh_token", spotifyAuth.onRefreshToken);
 
-// app.post("/analyzeAudio", onAnalyzeAudioPost);
-// app.get("/analyzedAudio", onAnalyzedAudio);
+app.post("/analyzeAudio", onAnalyzeAudioPost);
+app.get("/analyzedAudio", onAnalyzedAudio);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
