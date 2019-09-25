@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon index.js"
+		"start": "node index.js",
+		"dev": "nodemon index.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -14,6 +15,7 @@
 		"cookie-parser": "^1.4.4",
 		"cors": "^2.8.5",
 		"deep-affects": "^0.1.7",
+		"dotenv": "^8.1.0",
 		"ejs": "^2.7.1",
 		"express": "^4.17.1",
 		"filereader": "^0.10.3",
@@ -23,7 +25,6 @@
 		"slug": "^1.1.0"
 	},
 	"devDependencies": {
-		"dotenv": "^8.1.0",
 		"nodemon": "^1.19.2"
 	}
 }
