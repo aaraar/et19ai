@@ -1,19 +1,88 @@
 body {
-	background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2gTrQO57yeE06cf5lkEQGyDOExrtflngYZsq2Zl3XBL3E9juYew);
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 100vh;
+	background-color: #90afc5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+h1 {
+	font-family: sans-serif;
+	color: seagreen;
+}
+.main-container {
+	padding: 1em;
+	margin-top: 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 10px;
+	background-color: #2a3132;
+	overflow: hidden;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
 }
 
-.recording {
-	background-image: linear-gradient(270deg, #7aedcf, #17ff59, #0d802e);
-	background-size: 600% 600%;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;
-	-webkit-background-clip: text;
-	-webkit-animation: AnimationName 4s ease infinite;
-	-moz-animation: AnimationName 4s ease infinite;
-	animation: AnimationName 4s ease infinite;
+#recording {
+	font-family: sans-serif;
+	transition: 0.2s ease;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 200px;
+}
+#recording.recording {
+	color: red;
+}
+
+@keyframes pulse {
+	0% {
+		background-color: rgb(100, 0, 0);
+		box-shadow: 0px 0px 5px 0px rgba(173, 0, 0, 0.3);
+	}
+	65% {
+		box-shadow: 0px 0px 5px 13px rgba(255, 0, 0, 0.3);
+		background-color: rgb(255, 0, 0);
+	}
+	90% {
+		box-shadow: 0px 0px 5px 13px rgba(173, 0, 0, 0);
+		background-color: rgb(180, 0, 0);
+	}
+}
+.recordingSign {
+	width: 30px;
+	height: 30px;
+	font-size: 0;
+	background-color: rgb(100, 0, 0);
+	border: 0;
+	border-radius: 30px;
+	outline: none;
+}
+.rec {
+	animation-name: pulse;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+.btn {
+	font-family: sans-serif;
+	margin: 1em 0.5em;
+	padding: 1em 2em;
+	border-radius: 0;
+	box-shadow: none;
+	border: none;
+	color: white;
+	font-size: 0.8rem;
+	background-color: #336b87;
+	cursor: pointer;
+	text-decoration: none;
+	border-radius: 3px;
+}
+.btn.disabled {
+	background-color: grey;
+	color: darkgrey;
+	cursor: default;
+}
+.btn.spotify {
+	background-color: #1ed760;
+	border-radius: 3px;
 }
 @-webkit-keyframes AnimationName {
 	0% {
@@ -48,25 +117,41 @@ body {
 		background-position: 0% 50%;
 	}
 }
-h1 {
-	color: rgb(62, 182, 62);
-}
 
 .formAjaxButton {
-	display: none;
+	transition: 0.2s ease;
 }
 #stop {
-	display: none;
+	cursor: pointer;
+	transition: 0.2s ease;
 }
 #download {
-	display: none;
+	transition: 0.2s ease;
 }
-#download.active {
-	display: block;
+
+#stop[disabled] {
+	cursor: default;
+	background-color: grey;
+	color: darkgrey;
 }
-#stop.active {
-	display: block;
+.formAjaxButton.disabled {
+	opacity: 1;
+	cursor: default;
+	background-color: grey;
+	color: darkgrey;
 }
-.formAjaxButton.active {
-	display: block;
+
+.recordingControls {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 3px;
+	padding: 0.5em 0 0;
+	background-color: #414647;
+}
+.recordingControls h2 {
+	margin: 0;
+	color: white;
+	font-family: sans-serif;
 }
