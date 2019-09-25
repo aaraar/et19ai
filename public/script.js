@@ -42,6 +42,10 @@ const handleSuccess = function(stream) {
 	});
 
 	mediaRecorder.addEventListener("stop", function() {
+		if (document.querySelector(".audio-player")) {
+			const x = document.querySelector(".audio-player");
+			x.parentNode.removeChild(x);
+		}
 		const audioFile = document.getElementById("audioFile");
 		const reader = new FileReader();
 		let playerEl = document.createElement("div");
