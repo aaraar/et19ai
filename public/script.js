@@ -7,7 +7,7 @@ const downloadLink = document.getElementById("download");
 const stopButton = document.getElementById("stop");
 const playerContainer = document.querySelector(".player-container");
 const analyzeButton = document.querySelector(".formAjaxButton");
-const dataContainer = document.querySelector(".emotionData");
+const dataDisplay = document.getElementById("emotionData");
 
 stopButton.addEventListener("click", () => {
 	shouldStop = true;
@@ -148,4 +148,28 @@ analyzeButton.addEventListener("click", (e) => {
 			});
 		});
 	}
+	async function getAnalyzedData() {
+		let analyzedDataCall = await fetch("/analyzedAudio");
+		let analyzedData = await analyzedDataCall.json();
+		return analyzedData;
+	}
+	getEmotionData().then(() => {
+		console.log("file created on server");
+		getAnalyzedData().then((data) => {
+			let emo = data;
+			let emoLength = document.createElement('h1');
+			emoLength.innerHTML = `there are ${emo.length} emotions recognized`;
+			dataDisplay.appendChild(emoLength);
+			console.log(`there are ${emo.length} emotions recognized`);
+			for(let i = 0 ; i<emo.length; i++){
+				let emoNode = document.createElement('h2');
+				emoNode.innerHTML = emo[i].emotion;
+				dataDisplay.appendChild(emoNode);
+				let end = emo[i].end;
+				let start = emo[i].start;
+				end - start;
+			}
+				
+		});
+	});
 });
