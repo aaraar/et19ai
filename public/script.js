@@ -20,8 +20,10 @@ stopButton.addEventListener("click", () => {
 
 const handleSuccess = function(stream) {
 	stopButton.addEventListener("click", function() {
+		analyzeButton.classList.remove("disabled");
 		mediaRecorder.stop();
 	});
+	
 	addEventListener("keyup", function(event) {
 		if (event.keyCode == 32) {
 			analyzeButton.classList.remove("disabled");
