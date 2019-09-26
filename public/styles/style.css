@@ -182,7 +182,6 @@ a.btn:visited {
 	color: white;
 	font-family: sans-serif;
 }
-<<<<<<< HEAD
 .loader{
 	margin: 0 0 2em;
 	height: 100px;
@@ -204,7 +203,6 @@ a.btn:visited {
 .hidden{
 	display: none;
 }
-=======
 
 .slide-in-top {
 	-webkit-animation: slide-in-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -261,4 +259,3 @@ a.btn:visited {
 		background-color: #90afc5;
 	}
 }
->>>>>>> 06cab66530296b9c9f344cc2c5cfd2c945468289

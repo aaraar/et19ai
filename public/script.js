@@ -160,7 +160,7 @@ analyzeButton.addEventListener("click", (e) => {
 					dataDisplay.appendChild(emoNode);
 					let end = emo[i].end;
 					let start = emo[i].start;
-					end - start;
+					let totalOf = end - start;
 				}
 					
 			});
