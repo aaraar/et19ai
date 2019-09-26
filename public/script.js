@@ -148,7 +148,6 @@ analyzeButton.addEventListener("click", (e) => {
 			});
 		});
 	}
-<<<<<<< HEAD
 	async function getAnalyzedData() {
 		let analyzedDataCall = await fetch("/analyzedAudio");
 		let analyzedData = await analyzedDataCall.json();
@@ -173,6 +172,4 @@ analyzeButton.addEventListener("click", (e) => {
 				
 		});
 	});
-=======
->>>>>>> d6dbe8c1b0e54255c2313a0563e20ad34df5239a
 });
