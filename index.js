@@ -34,7 +34,12 @@ app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
 app
-	.get("/", (req, res) => res.render("home", { title: "home" }))
+	.get("/", (req, res) =>
+		res.render("home", { title: "home", loggedin: "false" })
+	)
+	.get("/spotifyLoggedIn", (req, res) =>
+		res.render("home", { title: "home", loggedin: "true" })
+	)
 	.get("/test", (req, res) => res.send(body))
 	.get("/login", spotifyAuth.onLogin)
 	.get("/callback", spotifyAuth.onCallback)
