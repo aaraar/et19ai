@@ -21,6 +21,7 @@ const handleSuccess = function(stream) {
 	stopButton.addEventListener("click", function() {
 		mediaRecorder.stop();
 	});
+	analyzeButton.removeAttribute("disabled");
 	addEventListener("keyup", function(event) {
 		if (event.keyCode == 32) {
 			analyzeButton.classList.remove("disabled");
@@ -157,19 +158,18 @@ analyzeButton.addEventListener("click", (e) => {
 		console.log("file created on server");
 		getAnalyzedData().then((data) => {
 			let emo = data;
-			let emoLength = document.createElement('h1');
+			let emoLength = document.createElement("h1");
 			emoLength.innerHTML = `there are ${emo.length} emotions recognized`;
 			dataDisplay.appendChild(emoLength);
 			console.log(`there are ${emo.length} emotions recognized`);
-			for(let i = 0 ; i<emo.length; i++){
-				let emoNode = document.createElement('h2');
+			for (let i = 0; i < emo.length; i++) {
+				let emoNode = document.createElement("h2");
 				emoNode.innerHTML = emo[i].emotion;
 				dataDisplay.appendChild(emoNode);
 				let end = emo[i].end;
 				let start = emo[i].start;
 				end - start;
 			}
-				
 		});
 	});
 });
