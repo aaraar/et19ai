@@ -7,7 +7,8 @@ const downloadLink = document.getElementById("download");
 const stopButton = document.getElementById("stop");
 const playerContainer = document.querySelector(".player-container");
 const analyzeButton = document.querySelector(".formAjaxButton");
-const dataDisplay = document.getElementById("emotionData");
+const dataDisplay = document.querySelector(".emotionData");
+const loaderSVG = document.querySelector(".loader");
 
 stopButton.addEventListener("click", () => {
 	shouldStop = true;
@@ -19,12 +20,14 @@ stopButton.addEventListener("click", () => {
 
 const handleSuccess = function(stream) {
 	stopButton.addEventListener("click", function() {
+		analyzeButton.classList.remove("disabled");
 		mediaRecorder.stop();
 	});
-	analyzeButton.removeAttribute("disabled");
+	
 	addEventListener("keyup", function(event) {
 		if (event.keyCode == 32) {
 			analyzeButton.classList.remove("disabled");
+			analyzeButton.removeAttribute("disabled");
 			recording.classList.remove("recording"); // removes recording when space is released
 			fired = false;
 			mediaRecorder.stop();
@@ -121,6 +124,7 @@ document.querySelector("#start").addEventListener("click", () => {
 
 analyzeButton.addEventListener("click", (e) => {
 	e.preventDefault();
+	loaderSVG.classList.remove("hidden");
 	if (analyzeButton.classList.contains("disabled")) {
 		return;
 	} else {
@@ -132,44 +136,48 @@ analyzeButton.addEventListener("click", (e) => {
 				headers: {
 					"Content-Type": "application/json"
 				},
+				
 				body: JSON.stringify({ audioFile: audioBlob.value })
+				
 			});
 			let emotion = await emotionCall;
 			console.log(emotion);
 		}
 		async function getAnalyzedData() {
 			let analyzedDataCall = await fetch("/analyzedAudio");
-			let analyzedData = await analyzedDataCall.json();
+			let analyzedData = await analyzedDataCall.json()
+			.then(loaderSVG.classList.add("hidden"))
+			.then(dataDisplay.classList.remove("hidden"));
 			return analyzedData;
 		}
 		getEmotionData().then(() => {
-			console.log("file created on server");
+			
 			getAnalyzedData().then((data) => {
-				console.log(data);
+				let emo = data;
+				let emoLength = document.createElement('h1');
+				if (emo.length <= 1){
+					emoLength.innerHTML = `there is ${emo.length} emotion recognized`;
+				} else {
+					emoLength.innerHTML = `there are ${emo.length} emotions recognized`;
+				}
+				dataDisplay.appendChild(emoLength);
+				
+				for(let i = 0 ; i<emo.length; i++){
+					let emoNode = document.createElement('h3');
+					let end = emo[i].end;
+					let start = emo[i].start;
+					let totalOf = end - start;
+
+					emoNode.innerHTML = `${emo[i].emotion} for a total of ${totalOf} seconds`;
+
+					emoNode.classList.add(emo[i].emotion);
+					
+					dataDisplay.appendChild(emoNode);
+					
+				}
+					
 			});
 		});
 	}
-	async function getAnalyzedData() {
-		let analyzedDataCall = await fetch("/analyzedAudio");
-		let analyzedData = await analyzedDataCall.json();
-		return analyzedData;
-	}
-	getEmotionData().then(() => {
-		console.log("file created on server");
-		getAnalyzedData().then((data) => {
-			let emo = data;
-			let emoLength = document.createElement("h1");
-			emoLength.innerHTML = `there are ${emo.length} emotions recognized`;
-			dataDisplay.appendChild(emoLength);
-			console.log(`there are ${emo.length} emotions recognized`);
-			for (let i = 0; i < emo.length; i++) {
-				let emoNode = document.createElement("h2");
-				emoNode.innerHTML = emo[i].emotion;
-				dataDisplay.appendChild(emoNode);
-				let end = emo[i].end;
-				let start = emo[i].start;
-				end - start;
-			}
-		});
-	});
+	
 });
