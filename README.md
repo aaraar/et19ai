@@ -54,4 +54,4 @@ To use the app simply press start to record en stop to end the record. You could
 
 When a succesfull analyze had taken place the results will be availeble below
 Example of analyzed audio:
-![Screenshot from Analyzed audio fragment]()
+![Screenshot from Analyzed audio fragment](https://github.com/aaraar/et19ai/blob/master/wiki/Screenshot)
