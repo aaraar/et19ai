@@ -15,15 +15,15 @@ stopButton.addEventListener("click", () => {
 	recording.classList.remove("recording"); // changes background when pressing spacebar
 	recordingSign.classList.remove("rec");
 	stopButton.setAttribute("disabled", "");
+	analyzeButton.removeAttribute("disabled");
 	analyzeButton.classList.remove("disabled");
 });
 
 const handleSuccess = function(stream) {
 	stopButton.addEventListener("click", function() {
-		analyzeButton.classList.remove("disabled");
 		mediaRecorder.stop();
 	});
-	
+
 	addEventListener("keyup", function(event) {
 		if (event.keyCode == 32) {
 			analyzeButton.classList.remove("disabled");
@@ -136,34 +136,33 @@ analyzeButton.addEventListener("click", (e) => {
 				headers: {
 					"Content-Type": "application/json"
 				},
-				
+
 				body: JSON.stringify({ audioFile: audioBlob.value })
-				
 			});
 			let emotion = await emotionCall;
 			console.log(emotion);
 		}
 		async function getAnalyzedData() {
 			let analyzedDataCall = await fetch("/analyzedAudio");
-			let analyzedData = await analyzedDataCall.json()
-			.then(loaderSVG.classList.add("hidden"))
-			.then(dataDisplay.classList.remove("hidden"));
+			let analyzedData = await analyzedDataCall
+				.json()
+				.then(loaderSVG.classList.add("hidden"))
+				.then(dataDisplay.classList.remove("hidden"));
 			return analyzedData;
 		}
 		getEmotionData().then(() => {
-			
 			getAnalyzedData().then((data) => {
 				let emo = data;
-				let emoLength = document.createElement('h1');
-				if (emo.length <= 1){
+				let emoLength = document.createElement("h1");
+				if (emo.length <= 1) {
 					emoLength.innerHTML = `there is ${emo.length} emotion recognized`;
 				} else {
 					emoLength.innerHTML = `there are ${emo.length} emotions recognized`;
 				}
 				dataDisplay.appendChild(emoLength);
-				
-				for(let i = 0 ; i<emo.length; i++){
-					let emoNode = document.createElement('h3');
+
+				for (let i = 0; i < emo.length; i++) {
+					let emoNode = document.createElement("h3");
 					let end = emo[i].end;
 					let start = emo[i].start;
 					let totalOf = end - start;
@@ -171,13 +170,10 @@ analyzeButton.addEventListener("click", (e) => {
 					emoNode.innerHTML = `${emo[i].emotion} for a total of ${totalOf} seconds`;
 
 					emoNode.classList.add(emo[i].emotion);
-					
+
 					dataDisplay.appendChild(emoNode);
-					
 				}
-					
 			});
 		});
 	}
-	
 });

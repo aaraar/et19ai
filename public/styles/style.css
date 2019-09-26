@@ -11,22 +11,22 @@ h1 {
 	font-family: sans-serif;
 	color: seagreen;
 }
-.neutral{
+.neutral {
 	color: #fff;
 }
-.angry{
+.angry {
 	color: red;
 }
-.disgust{
+.disgust {
 	color: rgb(233, 126, 4);
 }
-.excited{
+.excited {
 	color: seagreen;
 }
-.frustration{
+.frustration {
 	color: darkred;
 }
-.happy{
+.happy {
 	color: greenyellow;
 }
 
@@ -202,7 +202,7 @@ a.btn:visited {
 	color: white;
 	font-family: sans-serif;
 }
-.loader{
+.loader {
 	margin: 0 0 2em;
 	height: 100px;
 	width: 100%;
@@ -211,24 +211,24 @@ a.btn:visited {
 	margin: 0 auto 1em;
 	display: inline-block;
 	vertical-align: top;
-  }
-  
-  /*
+}
+
+/*
 	Set the color of the icon
   */
-  svg path,
-  svg rect{
+svg path,
+svg rect {
 	fill: seagreen;
-  }
-.loading{
+}
+.loading {
 	background: linear-gradient(15deg, seagreen, #1aee47);
 	background-size: 600% 600%;
 	background-clip: text;
 	-webkit-background-clip: text;
-  	-webkit-text-fill-color: transparent;
+	-webkit-text-fill-color: transparent;
 	animation: animationName 1s infinite;
 }
-.hidden{
+.hidden {
 	display: none;
 }
 
@@ -286,4 +286,8 @@ a.btn:visited {
 	100% {
 		background-color: #90afc5;
 	}
+}
+
+.emotionData {
+	min-width: 500px;
 }
