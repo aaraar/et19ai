@@ -31,18 +31,23 @@ Or by running: `npm run dev` [nodemon]
 
 Your terminal will now look something like this:
 
-> emotionRecognition@1.0.0 dev /Users/wouterh/Documents/Jaar 3/AI/MoodPlayer/et19ai
-> nodemon index.js
+> emotionRecognition@1.0.0 dev /yourSpecificFileStructure/et19ai
+> 
+>nodemon index.js
 >
 >[nodemon] 1.19.2
+
 >[nodemon] to restart at any time, enter `rs`
+
 >[nodemon] watching dir(s): *.*
+
 >[nodemon] starting `node index.js`
+
 >App listening on port 3000!
 
 - Browse to http://localhost:3000/
 Your browser will look like this:
-
+![](https://github.com/aaraar/et19ai/blob/develop/wiki/Screenshot%202019-09-26%20at%2014.43.02.png?=200)
 ## 4. Usage
 
 
