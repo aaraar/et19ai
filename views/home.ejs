@@ -1,4 +1,5 @@
 <%- include('partials/header'); %>
+<<<<<<< HEAD
 <h1>moodPlayer</h1>
 <button id="start">Start recording</button>
 <a id="download">Download</a>
@@ -12,4 +13,39 @@
 <div id="emotionData"></div>
 <script src="/static/script.js"></script>
 
+=======
+<div class="main-container">
+	<h1>moodPlayer</h1>
+	<div class="recordingControls">
+		<h2>Recording Controls</h2>
+		<div class="recordButtons">
+			<button class="btn" id="start">Start</button
+			><button disabled class="btn" id="stop">Stop</button
+			><a class="btn disabled" id="download">Download</a>
+		</div>
+	</div>
+	<div class="recordButtons"></div>
+	<form id="analyzeForm" action="/analyzeAudio" method="POST">
+		<input id="audioFile" type="hidden" name="audioFile" />
+		<button disabled type="submit" class="formAjaxButton btn disabled">
+			Analyze Audio
+		</button>
+	</form>
+	<h2 id="recording">
+		<button class="recordingSign">recording</button>RECORDING
+	</h2>
+	<div class="player-container"></div>
+	<a href="/login" id="spotifyLogin" class="btn spotify">Log in with Spotify</a>
+	<div class="emotionData"></div>
+	<!-- <iframe
+		src="https://open.spotify.com/embed/track/1a2NJNhwc7wgN0dJuPcw82"
+		width="300"
+		height="380"
+		frameborder="0"
+		allowtransparency="true"
+		allow="encrypted-media"
+	></iframe> -->
+</div>
+<script src="/static/script.js"></script>
+>>>>>>> d6dbe8c1b0e54255c2313a0563e20ad34df5239a
 <%- include('partials/footer'); %>

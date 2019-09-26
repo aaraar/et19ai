@@ -13,7 +13,7 @@ require("dotenv").config();
 
 const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
-const redirect_uri = "https://localhost:8443/test"; // Your redirect uri
+const redirect_uri = "https://voicemood.herokuapp.com/"; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters

@@ -2,15 +2,19 @@ console.log("connected");
 let shouldStop = false;
 let stopped = false;
 const recording = document.getElementById("recording");
+const recordingSign = document.querySelector(".recordingSign");
 const downloadLink = document.getElementById("download");
 const stopButton = document.getElementById("stop");
 const playerContainer = document.querySelector(".player-container");
 const analyzeButton = document.querySelector(".formAjaxButton");
 const dataDisplay = document.getElementById("emotionData");
 
-stopButton.addEventListener("click", function() {
+stopButton.addEventListener("click", () => {
 	shouldStop = true;
-	analyzeButton.classList.add("active");
+	recording.classList.remove("recording"); // changes background when pressing spacebar
+	recordingSign.classList.remove("rec");
+	stopButton.setAttribute("disabled", "");
+	analyzeButton.classList.remove("disabled");
 });
 
 const handleSuccess = function(stream) {
@@ -19,7 +23,7 @@ const handleSuccess = function(stream) {
 	});
 	addEventListener("keyup", function(event) {
 		if (event.keyCode == 32) {
-			analyzeButton.classList.add("active");
+			analyzeButton.classList.remove("disabled");
 			recording.classList.remove("recording"); // removes recording when space is released
 			fired = false;
 			mediaRecorder.stop();
@@ -55,7 +59,7 @@ const handleSuccess = function(stream) {
             `;
 		downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
 		downloadLink.download = "acetest.wav";
-		downloadLink.classList.add("active");
+		downloadLink.classList.remove("disabled");
 
 		playerEl.classList.add("audio-player");
 		playerEl.innerHTML = playerMarkup;
@@ -84,13 +88,16 @@ addEventListener("keydown", function(event) {
 	if (event.keyCode == 32) {
 		fired = true;
 		record();
+
 		recording.classList.add("recording"); // changes background when pressing spacebar
+		recordingSign.classList.add("rec");
 	}
 	console.log(fired);
 
 	addEventListener("keyup", function(event) {
 		if (event.keyCode == 32) {
 			recording.classList.remove("recording"); // removes recording when space is released
+			recordingSign.classList.remove("rec");
 			fired = false;
 		}
 	});
@@ -103,7 +110,9 @@ function record() {
 }
 
 document.querySelector("#start").addEventListener("click", () => {
-	stopButton.classList.add("active");
+	stopButton.removeAttribute("disabled");
+	recording.classList.add("recording"); // changes background when pressing spacebar
+	recordingSign.classList.add("rec");
 	navigator.mediaDevices
 		.getUserMedia({ audio: true, video: false })
 		.then(handleSuccess);
@@ -111,19 +120,35 @@ document.querySelector("#start").addEventListener("click", () => {
 
 analyzeButton.addEventListener("click", (e) => {
 	e.preventDefault();
-	const audioBlob = document.getElementById("audioFile");
-	async function getEmotionData() {
-		let emotionCall = await fetch("/analyzeAudio", {
-			method: "POST",
-			mode: "cors",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify({ audioFile: audioBlob.value })
+	if (analyzeButton.classList.contains("disabled")) {
+		return;
+	} else {
+		const audioBlob = document.getElementById("audioFile");
+		async function getEmotionData() {
+			let emotionCall = await fetch("/analyzeAudio", {
+				method: "POST",
+				mode: "cors",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ audioFile: audioBlob.value })
+			});
+			let emotion = await emotionCall;
+			console.log(emotion);
+		}
+		async function getAnalyzedData() {
+			let analyzedDataCall = await fetch("/analyzedAudio");
+			let analyzedData = await analyzedDataCall.json();
+			return analyzedData;
+		}
+		getEmotionData().then(() => {
+			console.log("file created on server");
+			getAnalyzedData().then((data) => {
+				console.log(data);
+			});
 		});
-		let emotion = await emotionCall;
-		console.log(emotion);
 	}
+<<<<<<< HEAD
 	async function getAnalyzedData() {
 		let analyzedDataCall = await fetch("/analyzedAudio");
 		let analyzedData = await analyzedDataCall.json();
@@ -148,4 +173,6 @@ analyzeButton.addEventListener("click", (e) => {
 				
 		});
 	});
+=======
+>>>>>>> d6dbe8c1b0e54255c2313a0563e20ad34df5239a
 });
