@@ -143,24 +143,35 @@ analyzeButton.addEventListener("click", (e) => {
 		}
 		async function getAnalyzedData() {
 			let analyzedDataCall = await fetch("/analyzedAudio");
-			let analyzedData = await analyzedDataCall.json().then(loaderSVG.classList.add("hidden"));
+			let analyzedData = await analyzedDataCall.json()
+			.then(loaderSVG.classList.add("hidden"))
+			.then(dataDisplay.classList.remove("hidden"));
 			return analyzedData;
 		}
 		getEmotionData().then(() => {
-			console.log("file created on server");
+			
 			getAnalyzedData().then((data) => {
 				let emo = data;
 				let emoLength = document.createElement('h1');
-				emoLength.innerHTML = `there are ${emo.length} emotions recognized`;
+				if (emo.length <= 1){
+					emoLength.innerHTML = `there is ${emo.length} emotion recognized`;
+				} else {
+					emoLength.innerHTML = `there are ${emo.length} emotions recognized`;
+				}
 				dataDisplay.appendChild(emoLength);
-				console.log(`there are ${emo.length} emotions recognized`);
+				
 				for(let i = 0 ; i<emo.length; i++){
-					let emoNode = document.createElement('h2');
-					emoNode.innerHTML = emo[i].emotion;
-					dataDisplay.appendChild(emoNode);
+					let emoNode = document.createElement('h3');
 					let end = emo[i].end;
 					let start = emo[i].start;
 					let totalOf = end - start;
+
+					emoNode.innerHTML = `${emo[i].emotion} for a total of ${totalOf} seconds`;
+
+					emoNode.classList.add(emo[i].emotion);
+					
+					dataDisplay.appendChild(emoNode);
+					
 				}
 					
 			});

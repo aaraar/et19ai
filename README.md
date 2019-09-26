@@ -36,18 +36,22 @@ Your terminal will now look something like this:
 >nodemon index.js
 >
 >[nodemon] 1.19.2
-
+>
 >[nodemon] to restart at any time, enter `rs`
-
+>
 >[nodemon] watching dir(s): *.*
-
+>
 >[nodemon] starting `node index.js`
 
 >App listening on port 3000!
 
 - Browse to http://localhost:3000/
 Your browser will look like this:
-![](https://github.com/aaraar/et19ai/blob/develop/wiki/Screenshot%202019-09-26%20at%2014.43.02.png?=200)
+![Screenshot from moodPlayer](https://github.com/aaraar/et19ai/blob/develop/wiki/Screenshot%202019-09-26%20at%2014.43.02.png?=200)
 ## 4. Usage
 
+To use the app simply press start to record en stop to end the record. You could also hold spacebar to record, the recording will stop when you release. After you recorded a sample you can start analyzing for emotion with the Analyze Audio button.
 
+When a succesfull analyze had taken place the results will be availeble below
+Example of analyzed audio:
+![Screenshot from Analyzed audio fragment]()
