@@ -173,17 +173,36 @@ analyzeButton.addEventListener("click", (e) => {
 
 				for (let i = 0; i < emo.length; i++) {
 					let emoNode = document.createElement("h3");
-					let spotifySong = document.createElement("div");
+					let div = document.createElement("div");
 					let end = emo[i].end;
 					let start = emo[i].start;
 					let totalOf = end - start;
-
 					emoNode.innerHTML = `${emo[i].emotion} for a total of ${totalOf} seconds`;
 					
 					emoNode.classList.add(emo[i].emotion);
 					
+					switch (emo[i].emotion) {
+						case 'anger':
+							div.innerHTML = angerSong
+							break;
+						case 'surprise':
+							div.innerHTML = surpriseSong
+							break;
+						case 'neutral':
+							div.innerHTML = neutralSong
+							break;
+						case 'happy':
+							div.innerHTML = neutralSong
+							break;
+						case 'fear':
+							div.innerHTML = fearSong
+							break;
+						case 'sad':
+								div.innerHTML = sadnessSong
+								break;
+						}
 					dataDisplay.appendChild(emoNode);
-					spotifySong.appendChild(`${emo[i].emotion}Song`);
+					spotifySong.appendChild(div);
 						
 				}
 			});
