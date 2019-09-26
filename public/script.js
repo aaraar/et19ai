@@ -12,13 +12,13 @@ const loaderSVG = document.querySelector(".loader");
 const spotifySong = document.querySelector(".spotify-container");
 
 
-const angerSong = `<iframe src="https://open.spotify.com/embed/track/2DlHlPMa4M17kufBvI2lEN" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-const disgustSong = `<iframe src="https://open.spotify.com/embed/track/6TwOdVpSVSd7QtwMRm05nR" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-const fearSong = `<iframe src="https://open.spotify.com/embed/track/6A9mKXlFRPMPem6ygQSt7z" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-const happinessSong = `<iframe src="https://open.spotify.com/embed/track/1PmXm1881bonBI1AlG5uaH" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-const sadnessSong = `<iframe src="https://open.spotify.com/embed/track/3JOVTQ5h8HGFnDdp4VT3MP" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-const surpriseSong = `<iframe src="https://open.spotify.com/embed/track/2x5QAdEPa0lEZMr38APFY6" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-const neutralSong = `<iframe src="https://open.spotify.com/embed/track/51rPRW8NjxZoWPPjnRGzHw" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+const angerSong = `<iframe src="https://open.spotify.com/embed/track/2DlHlPMa4M17kufBvI2lEN" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+const disgustSong = `<iframe src="https://open.spotify.com/embed/track/6TwOdVpSVSd7QtwMRm05nR" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+const fearSong = `<iframe src="https://open.spotify.com/embed/track/6A9mKXlFRPMPem6ygQSt7z" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+const happinessSong = `<iframe src="https://open.spotify.com/embed/track/1PmXm1881bonBI1AlG5uaH" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+const sadnessSong = `<iframe src="https://open.spotify.com/embed/track/3JOVTQ5h8HGFnDdp4VT3MP" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+const surpriseSong = `<iframe src="https://open.spotify.com/embed/track/2x5QAdEPa0lEZMr38APFY6" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
+const neutralSong = `<iframe src="https://open.spotify.com/embed/track/51rPRW8NjxZoWPPjnRGzHw" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
 
 stopButton.addEventListener("click", () => {
 	shouldStop = true;
@@ -173,6 +173,7 @@ analyzeButton.addEventListener("click", (e) => {
 
 				for (let i = 0; i < emo.length; i++) {
 					let emoNode = document.createElement("h3");
+					let h4 = document.createElement("h4");
 					let div = document.createElement("div");
 					let end = emo[i].end;
 					let start = emo[i].start;
@@ -202,6 +203,8 @@ analyzeButton.addEventListener("click", (e) => {
 								break;
 						}
 					dataDisplay.appendChild(emoNode);
+					spotifySong.appendChild(h4); 
+					h4.innerHTML= `We picked this song for you based on ${emo[i].emotion} emotion`;
 					spotifySong.appendChild(div);
 						
 				}
