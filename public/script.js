@@ -9,6 +9,8 @@ const playerContainer = document.querySelector(".player-container");
 const analyzeButton = document.querySelector(".formAjaxButton");
 const dataDisplay = document.querySelector(".emotionData");
 const loaderSVG = document.querySelector(".loader");
+const spotifySong = document.querySelector(".spotify-container");
+
 
 stopButton.addEventListener("click", () => {
 	shouldStop = true;
@@ -163,15 +165,18 @@ analyzeButton.addEventListener("click", (e) => {
 
 				for (let i = 0; i < emo.length; i++) {
 					let emoNode = document.createElement("h3");
+					let spotifySong = document.createElement("div");
 					let end = emo[i].end;
 					let start = emo[i].start;
 					let totalOf = end - start;
 
 					emoNode.innerHTML = `${emo[i].emotion} for a total of ${totalOf} seconds`;
-
+					
 					emoNode.classList.add(emo[i].emotion);
-
+					
 					dataDisplay.appendChild(emoNode);
+					spotifySong.appendChild(`${emo[i].emotion}Song`);
+						
 				}
 			});
 		});

@@ -52,6 +52,6 @@ Your browser will look like this:
 
 To use the app simply press start to record en stop to end the record. You could also hold spacebar to record, the recording will stop when you release. After you recorded a sample you can start analyzing for emotion with the Analyze Audio button.
 
-When a succesfull analyze had taken place the results will be availeble below
+When a succesfull analyze had taken place the results will be available below
 Example of analyzed audio:
 ![Screenshot from Analyzed audio fragment](https://github.com/aaraar/et19ai/blob/master/wiki/Screenshot 2019-09-26 at 16.58.36.png)
