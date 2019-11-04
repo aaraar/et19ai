@@ -114,6 +114,7 @@ addEventListener("keydown", function(event) {
 		}
 	});
 });
+//==================================================================================
 
 function record() {
 	navigator.mediaDevices
